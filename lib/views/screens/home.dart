@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:walkmate/core/colors/colors.dart';
+import 'package:walkmate/core/constants/constants.dart';
 import 'package:walkmate/views/shared/style.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,19 +25,17 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             children: [
               Text(
                 'WalkMate',
-                style: textStyle(24, Colors.black, FontWeight.bold),
+                style: textStyle(24, blackColor, FontWeight.bold),
               ),
-              const SizedBox(
-                height: 10,
-              ),
+              height10,
               TabBar(
                   indicatorSize: TabBarIndicatorSize.label,
-                  indicatorColor: Colors.grey,
+                  indicatorColor: greyColor,
                   controller: _tabController,
                   isScrollable: true,
-                  labelColor: Colors.white,
-                  labelStyle: textStyle(20, Colors.white, FontWeight.bold),
-                  unselectedLabelColor: Colors.grey.withOpacity(0.3),
+                  labelColor: blackColor,
+                  labelStyle: textStyle(20, whiteColor, FontWeight.bold),
+                  unselectedLabelColor: greyColor.withOpacity(0.5),
                   tabs: const [
                     Tab(
                       text: "Men Shoes",
