@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:walkmate/controllers/basescreen_provider.dart';
 import 'package:walkmate/views/screens/base_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (context) => BaseScreenNotifier())
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
