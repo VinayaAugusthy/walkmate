@@ -51,9 +51,84 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                 child: TabBarView(controller: _tabController, children: [
                   Column(
                     children: [
-                      Container(
+                      SizedBox(
                         height: size.height * 0.405,
-                        color: Colors.amber,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  EdgeInsets.only(right: size.width * 0.03),
+                              child: Container(
+                                color: greyColor,
+                                height: size.height,
+                                width: size.width * 0.6,
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          height10,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Latest Shoes',
+                                style:
+                                    textStyle(20, blackColor, FontWeight.bold),
+                              ),
+                              Row(
+                                children: [
+                                  Text(
+                                    'Show All',
+                                    style: textStyle(
+                                      20,
+                                      blackColor,
+                                      FontWeight.bold,
+                                    ),
+                                  ),
+                                  const Icon(Icons.keyboard_double_arrow_right)
+                                ],
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                      height10,
+                      SizedBox(
+                        height: size.height * 0.13,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 6,
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  EdgeInsets.only(right: size.width * 0.03),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: whiteColor,
+                                    borderRadius: BorderRadius.circular(16),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: blackColor.withOpacity(0.3),
+                                        spreadRadius: 1,
+                                        blurRadius: 0.8,
+                                        offset: const Offset(0, 1),
+                                      )
+                                    ]),
+                                height: size.height * 0.12,
+                                width: size.width * 0.3,
+                                child: Image.network(
+                                  imageUrl,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       )
                     ],
                   ),
