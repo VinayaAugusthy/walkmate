@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:walkmate/views/shared/style.dart';
-
 import '../shared/bottom_navbar.dart';
 
 class BaseScreen extends StatelessWidget {
-  const BaseScreen({super.key});
-
+  BaseScreen({super.key});
+  List pageList = [];
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -22,7 +21,28 @@ class BaseScreen extends StatelessWidget {
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [BottomNavWidget(size: size)],
+            children: [
+              BottomNavWidget(
+                size: size,
+                onTap: () {},
+                icon: Icons.home,
+              ),
+              BottomNavWidget(
+                size: size,
+                onTap: () {},
+                icon: Icons.search,
+              ),
+              BottomNavWidget(
+                size: size,
+                onTap: () {},
+                icon: Icons.shopping_cart,
+              ),
+              BottomNavWidget(
+                size: size,
+                onTap: () {},
+                icon: Icons.person,
+              )
+            ],
           ),
         ),
       ),
