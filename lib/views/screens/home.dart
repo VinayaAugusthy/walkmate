@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:walkmate/core/colors/colors.dart';
 import 'package:walkmate/core/constants/constants.dart';
+import 'package:walkmate/models/sneakers_model.dart';
+import 'package:walkmate/services/helper.dart';
 import 'package:walkmate/views/shared/product_card.dart';
 import 'package:walkmate/views/shared/style.dart';
 
@@ -14,6 +16,29 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
+  late Future<List<Sneakers>> _male;
+  late Future<List<Sneakers>> _female;
+  late Future<List<Sneakers>> _kids;
+  getMale() {
+    _male = Hepler().getMaleSneakers();
+  }
+
+  getFemale() {
+    _female = Hepler().getFemaleSneakers();
+  }
+
+  getKids() {
+    _kids = Hepler().getKidsSneakers();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getMale();
+    getFemale();
+    getKids();
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
@@ -67,20 +92,34 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   Column(
                     children: [
                       SizedBox(
-                        height: size.height * 0.405,
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: 6,
-                          itemBuilder: (context, index) {
-                            return ProductCard(
-                                price: "\$200.00",
-                                category: 'Men Shoes',
-                                id: '1',
-                                image: imageUrl,
-                                name: "Addidas NMD");
-                          },
-                        ),
-                      ),
+                          height: size.height * 0.405,
+                          child: FutureBuilder<List<Sneakers>>(
+                            future: _male,
+                            builder: (context, snapshot) {
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const CircularProgressIndicator();
+                              } else if (snapshot.hasError) {
+                                return Text("Error ${snapshot.hasError}");
+                              } else {
+                                final male = snapshot.data;
+                                return ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: male!.length,
+                                  itemBuilder: (context, index) {
+                                    final shoe = snapshot.data![index];
+                                    return ProductCard(
+                                      price: shoe.price,
+                                      category: shoe.category,
+                                      id: shoe.id,
+                                      image: shoe.imageUrl[1],
+                                      name: shoe.name,
+                                    );
+                                  },
+                                );
+                              }
+                            },
+                          )),
                       height10,
                       Column(
                         children: [
