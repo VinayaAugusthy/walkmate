@@ -45,16 +45,11 @@ class _ProductCardState extends State<ProductCard> {
             children: [
               Stack(
                 children: [
-                  Padding(
-                    padding: EdgeInsets.only(
-                      top: size.width * 0.03,
-                    ),
-                    child: Container(
-                      height: size.height * 0.23,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(widget.image),
-                        ),
+                  Container(
+                    height: size.height * 0.2,
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: NetworkImage(widget.image),
                       ),
                     ),
                   ),
@@ -80,7 +75,7 @@ class _ProductCardState extends State<ProductCard> {
                       padding: EdgeInsets.only(
                         right: size.width * 0.01,
                         left: size.width * 0.01,
-                        top: size.width * 0.01,
+                        // top: size.width * 0.01,
                       ),
                       child: Text(
                         widget.name,
