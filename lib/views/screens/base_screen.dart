@@ -23,7 +23,7 @@ class BaseScreen extends StatelessWidget {
     return Consumer<BaseScreenNotifier>(
       builder: (BuildContext context, baseScreenNotifier, Widget? child) {
         return Scaffold(
-          backgroundColor: Colors.white,
+          backgroundColor: const Color.fromARGB(255, 220, 219, 219),
           bottomNavigationBar: BottomNavBar(size: size),
           body: pageList[baseScreenNotifier.pageIndex],
         );
