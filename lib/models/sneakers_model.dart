@@ -1,19 +1,10 @@
 import 'dart:convert';
 
-Sneaker sneakerFromJson(String str) => Sneaker.fromJson(json.decode(str));
+List<Sneakers> sneakersFromJson(String str) =>
+    List<Sneakers>.from(json.decode(str).map((x) => Sneakers.fromJson(x)));
 
-class Sneaker {
-  final String id;
-  final String name;
-  final String category;
-  final List<String> imageUrl;
-  final String oldPrice;
-  final List<dynamic> sizes;
-  final String price;
-  final String description;
-  final String title;
-
-  Sneaker({
+class Sneakers {
+  Sneakers({
     required this.id,
     required this.name,
     required this.category,
@@ -25,7 +16,17 @@ class Sneaker {
     required this.title,
   });
 
-  factory Sneaker.fromJson(Map<String, dynamic> json) => Sneaker(
+  final String id;
+  final String name;
+  final String category;
+  final List<String> imageUrl;
+  final String oldPrice;
+  final List<dynamic> sizes;
+  final String price;
+  final String description;
+  final String title;
+
+  factory Sneakers.fromJson(Map<String, dynamic> json) => Sneakers(
         id: json["id"],
         name: json["name"],
         category: json["category"],
