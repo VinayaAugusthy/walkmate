@@ -11,11 +11,11 @@ class HomeWidget extends StatelessWidget {
   const HomeWidget({
     super.key,
     required this.size,
-    required Future<List<Sneakers>> male,
+    required Future<List<Product>> male,
   }) : _male = male;
 
   final Size size;
-  final Future<List<Sneakers>> _male;
+  final Future<List<Product>> _male;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,7 @@ class HomeWidget extends StatelessWidget {
       children: [
         SizedBox(
             height: size.height * 0.405,
-            child: FutureBuilder<List<Sneakers>>(
+            child: FutureBuilder<List<Product>>(
               future: _male,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -41,8 +41,8 @@ class HomeWidget extends StatelessWidget {
                         price: "\$${shoe.price}",
                         category: shoe.category,
                         id: shoe.id,
-                        image: shoe.imageUrl[0],
-                        name: shoe.name,
+                        image: shoe.images[index],
+                        name: shoe.title,
                       );
                     },
                   );
@@ -81,7 +81,7 @@ class HomeWidget extends StatelessWidget {
         height10,
         SizedBox(
           height: size.height * 0.13,
-          child: FutureBuilder<List<Sneakers>>(
+          child: FutureBuilder<List<Product>>(
             future: _male,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
@@ -97,8 +97,7 @@ class HomeWidget extends StatelessWidget {
                     final shoe = snapshot.data![index];
                     return Padding(
                       padding: EdgeInsets.all(size.width * 0.02),
-                      child:
-                          LatestShoes(size: size, imageUrl: shoe.imageUrl[1]),
+                      child: LatestShoes(size: size, imageUrl: shoe.images[1]),
                     );
                   },
                 );

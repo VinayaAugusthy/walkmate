@@ -14,7 +14,7 @@ class ProductCard extends StatefulWidget {
   final String name;
   final String price;
   final String category;
-  final String id;
+  final int id;
   final String image;
   @override
   State<ProductCard> createState() => _ProductCardState();

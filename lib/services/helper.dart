@@ -1,5 +1,7 @@
-import 'package:flutter/services.dart' as the_bundle;
+import 'dart:convert';
+
 import 'package:walkmate/models/sneakers_model.dart';
+import 'package:http/http.dart' as http;
 
 class Hepler {
   // Future<List<Sneakers>> getMaleSneakers() async {
@@ -55,13 +57,20 @@ class Hepler {
 
   //   return sneaker;
   // }
-  static String url = 'https://dummyjson.com';
-  static String endPoint = '/mens-shoes';
-  getMaleSneakers() async {
-    final url = Uri.parse(Hepler.url + Hepler.endPoint);
-    final response = await http.get(url);
-    final data = json.decode(response.body);
 
-    log('data: $data');
+  Future<List<Product>> getMaleSneakers() async {
+    String uri = 'https://dummyjson.com/mens-shoes/';
+
+    final url = Uri.parse(uri);
+    List maleSneakers = [];
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+      final List<dynamic> results = data['results'];
+      for (var comingSoon in results) {
+        maleSneakers.add(comingSoon);
+      }
+    }
+    return Product.maleSneakersFromJson(maleSneakers);
   }
 }

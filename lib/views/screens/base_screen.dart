@@ -13,7 +13,7 @@ import '../shared/bottom_navbar.dart';
 class BaseScreen extends StatelessWidget {
   BaseScreen({super.key});
   List pageList = [
-    const ProductsByCat(),
+    const HomeScreen(),
     const SearchScreen(),
     const ShoppingCart(),
     const ProfileScreen()

@@ -1,40 +1,75 @@
+// To parse this JSON data, do
+//
+//     final maleSneakers = maleSneakersFromJson(jsonString);
+
 import 'dart:convert';
 
-List<Sneakers> sneakersFromJson(String str) =>
-    List<Sneakers>.from(json.decode(str).map((x) => Sneakers.fromJson(x)));
+MaleSneakers maleSneakersFromJson(String str) =>
+    MaleSneakers.fromJson(json.decode(str));
 
-class Sneakers {
-  Sneakers({
-    required this.id,
-    required this.name,
-    required this.category,
-    required this.imageUrl,
-    required this.oldPrice,
-    required this.sizes,
-    required this.price,
-    required this.description,
-    required this.title,
+class MaleSneakers {
+  final List<Product> products;
+  final int total;
+  final int skip;
+  final int limit;
+
+  MaleSneakers({
+    required this.products,
+    required this.total,
+    required this.skip,
+    required this.limit,
   });
 
-  final String id;
-  final String name;
-  final String category;
-  final List<String> imageUrl;
-  final String oldPrice;
-  final List<dynamic> sizes;
-  final String price;
-  final String description;
-  final String title;
-
-  factory Sneakers.fromJson(Map<String, dynamic> json) => Sneakers(
-        id: json["id"],
-        name: json["name"],
-        category: json["category"],
-        imageUrl: List<String>.from(json["imageUrl"].map((x) => x)),
-        oldPrice: json["oldPrice"],
-        sizes: List<dynamic>.from(json["sizes"].map((x) => x)),
-        price: json["price"],
-        description: json["description"],
-        title: json["title"],
+  factory MaleSneakers.fromJson(Map<String, dynamic> json) => MaleSneakers(
+        products: List<Product>.from(
+            json["products"].map((x) => Product.fromJson(x))),
+        total: json["total"],
+        skip: json["skip"],
+        limit: json["limit"],
       );
+}
+
+class Product {
+  final int id;
+  final String title;
+  final String description;
+  final int price;
+  final double discountPercentage;
+  final double rating;
+  final int stock;
+  final String brand;
+  final String category;
+  final String thumbnail;
+  final List<String> images;
+
+  Product({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.price,
+    required this.discountPercentage,
+    required this.rating,
+    required this.stock,
+    required this.brand,
+    required this.category,
+    required this.thumbnail,
+    required this.images,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        price: json["price"],
+        discountPercentage: json["discountPercentage"]?.toDouble(),
+        rating: json["rating"]?.toDouble(),
+        stock: json["stock"],
+        brand: json["brand"],
+        category: json["category"],
+        thumbnail: json["thumbnail"],
+        images: List<String>.from(json["images"].map((x) => x)),
+      );
+  static List<Product> maleSneakersFromJson(List<dynamic> maleSneaker) {
+    return maleSneaker.map((json) => Product.fromJson(json)).toList();
+  }
 }

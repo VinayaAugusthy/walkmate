@@ -16,27 +16,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
-  late Future<List<Sneakers>> _male;
-  late Future<List<Sneakers>> _female;
-  late Future<List<Sneakers>> _kids;
+  late Future<List<Product>> _male;
+  // late Future<List<Sneakers>> _female;
+  // late Future<List<Sneakers>> _kids;
   getMale() {
     _male = Hepler().getMaleSneakers();
   }
 
-  getFemale() {
-    _female = Hepler().getFemaleSneakers();
-  }
+  // getFemale() {
+  //   _female = Hepler().getFemaleSneakers();
+  // }
 
-  getKids() {
-    _kids = Hepler().getKidsSneakers();
-  }
+  // getKids() {
+  //   _kids = Hepler().getKidsSneakers();
+  // }
 
   @override
   void initState() {
     super.initState();
     getMale();
-    getFemale();
-    getKids();
+    // getFemale();
+    // getKids();
   }
 
   @override
@@ -92,8 +92,8 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
                   controller: _tabController,
                   children: [
                     HomeWidget(size: size, male: _male),
-                    HomeWidget(size: size, male: _female),
-                    HomeWidget(size: size, male: _kids),
+                    HomeWidget(size: size, male: _male),
+                    HomeWidget(size: size, male: _male),
                   ],
                 ),
               )
