@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:walkmate/core/colors/colors.dart';
-import 'package:walkmate/views/screens/view_product.dart';
 import 'package:walkmate/views/shared/style.dart';
 
 class ProductCard extends StatefulWidget {

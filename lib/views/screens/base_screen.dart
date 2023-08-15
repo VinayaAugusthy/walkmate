@@ -3,19 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:walkmate/controllers/basescreen_provider.dart';
-import 'package:walkmate/views/screens/cart.dart';
 import 'package:walkmate/views/screens/home.dart';
-import 'package:walkmate/views/screens/products_by_cart.dart';
 import 'package:walkmate/views/screens/profile.dart';
 import 'package:walkmate/views/screens/search.dart';
-import '../shared/bottom_navbar.dart';
 
 class BaseScreen extends StatelessWidget {
   BaseScreen({super.key});
   List pageList = [
     const HomeScreen(),
     const SearchScreen(),
-    const ShoppingCart(),
+    // ShoppingCart(),
     const ProfileScreen()
   ];
   @override
@@ -25,7 +22,7 @@ class BaseScreen extends StatelessWidget {
       builder: (BuildContext context, baseScreenNotifier, Widget? child) {
         return Scaffold(
           backgroundColor: const Color.fromARGB(255, 220, 219, 219),
-          bottomNavigationBar: BottomNavBar(size: size),
+          bottomNavigationBar: HomeScreen(),
           body: pageList[baseScreenNotifier.pageIndex],
         );
       },
