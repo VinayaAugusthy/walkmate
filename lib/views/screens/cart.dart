@@ -23,7 +23,6 @@ class _ShoppingCartState extends State<ShoppingCart> {
   @override
   void initState() {
     super.initState();
-    list;
   }
 
   @override
