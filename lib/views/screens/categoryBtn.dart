@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 import 'package:walkmate/views/shared/style.dart';
 
@@ -19,7 +21,7 @@ class CategoryBtn extends StatelessWidget {
             color: buttonClr,
             style: BorderStyle.solid,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(9)),
+          borderRadius: const BorderRadius.all(Radius.circular(9)),
         ),
         child: Text(
           label,

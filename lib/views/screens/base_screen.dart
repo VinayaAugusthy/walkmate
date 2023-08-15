@@ -17,12 +17,11 @@ class BaseScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.sizeOf(context);
     return Consumer<BaseScreenNotifier>(
       builder: (BuildContext context, baseScreenNotifier, Widget? child) {
         return Scaffold(
           backgroundColor: const Color.fromARGB(255, 220, 219, 219),
-          bottomNavigationBar: HomeScreen(),
+          bottomNavigationBar: const HomeScreen(),
           body: pageList[baseScreenNotifier.pageIndex],
         );
       },

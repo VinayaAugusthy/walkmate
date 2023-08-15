@@ -16,7 +16,7 @@ class ViewProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
-    final _cartBox = Hive.box<CartModel>('cart_box');
+    final cartBox = Hive.box<CartModel>('cart_box');
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -141,7 +141,7 @@ class ViewProduct extends StatelessWidget {
                   stock: product.stock,
                   images: product.images,
                 );
-                _cartBox.add(cartItem);
+                cartBox.add(cartItem);
                 Navigator.push(
                   context,
                   MaterialPageRoute(

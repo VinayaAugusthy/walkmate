@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:walkmate/core/colors/colors.dart';
 import '../../models/sneakers_model.dart';

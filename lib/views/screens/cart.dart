@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -28,6 +30,12 @@ class _ShoppingCartState extends State<ShoppingCart> {
     final cartBox = Hive.box<CartModel>('cart_box');
     list = cartBox.values.toList();
     setState(() {});
+  }
+
+  Future<void> removeCartItem(CartModel cartItem) async {
+    final cartBox = Hive.box<CartModel>('cart_box');
+    await cartBox.delete(cartItem); // Assuming your CartModel has a 'key' field
+    await fetchCartItems(); // Fetch the items again to update the list
   }
 
   @override
@@ -62,7 +70,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                   height: 20,
                 ),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.6,
+                  height: MediaQuery.of(context).size.height * 0.8,
                   child: ListView.builder(
                       itemCount: list.length,
                       padding: EdgeInsets.zero,
@@ -86,7 +94,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                       });
                                       final cartBox =
                                           Hive.box<CartModel>('cart_box');
-                                      await cartBox.delete(data.id);
+                                      await cartBox.delete(data);
                                     },
                                     backgroundColor: const Color(0xFF000000),
                                     foregroundColor: Colors.white,
@@ -103,10 +111,11 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     color: Colors.grey.shade100,
                                     boxShadow: [
                                       BoxShadow(
-                                          color: Colors.grey.shade500,
-                                          spreadRadius: 5,
-                                          blurRadius: 0.3,
-                                          offset: const Offset(0, 1)),
+                                        color: Colors.grey.shade500,
+                                        spreadRadius: 5,
+                                        blurRadius: 0.3,
+                                        offset: const Offset(0, 1),
+                                      ),
                                     ]),
                                 child: Row(
                                   mainAxisAlignment:
@@ -115,14 +124,16 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.all(12),
-                                          child: CachedNetworkImage(
-                                            imageUrl: data.images[index],
-                                            width: 70,
-                                            height: 70,
-                                            fit: BoxFit.fill,
-                                          ),
-                                        ),
+                                            padding: const EdgeInsets.all(10),
+                                            child: CachedNetworkImage(
+                                              imageUrl:
+                                                  index < data.images.length
+                                                      ? data.images[index]
+                                                      : '',
+                                              width: 70,
+                                              height: 70,
+                                              fit: BoxFit.fill,
+                                            )),
                                         Padding(
                                           padding: const EdgeInsets.only(
                                               top: 12, left: 20),
@@ -144,7 +155,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                                 height: 5,
                                               ),
                                               Text(
-                                                data.title,
+                                                data.brand,
                                                 style: textStyle(
                                                     14,
                                                     Colors.grey,
@@ -156,7 +167,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
                                               Row(
                                                 children: [
                                                   Text(
-                                                    widget.cartProduct.price
+                                                    '\$${widget.cartProduct.price}'
                                                         .toString(),
                                                     style: textStyle(
                                                         18,
