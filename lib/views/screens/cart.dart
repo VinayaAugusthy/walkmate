@@ -23,19 +23,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
   @override
   void initState() {
     super.initState();
-    fetchCartItems();
-  }
-
-  Future<void> fetchCartItems() async {
-    final cartBox = Hive.box<CartModel>('cart_box');
-    list = cartBox.values.toList();
-    setState(() {});
-  }
-
-  Future<void> removeCartItem(CartModel cartItem) async {
-    final cartBox = Hive.box<CartModel>('cart_box');
-    await cartBox.delete(cartItem); // Assuming your CartModel has a 'key' field
-    await fetchCartItems(); // Fetch the items again to update the list
+    list;
   }
 
   @override
