@@ -33,7 +33,7 @@ class HomeWidget extends StatelessWidget {
             future: _male,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 print(snapshot.error);
                 return Text("Error ${snapshot.error}");
@@ -115,12 +115,12 @@ class HomeWidget extends StatelessWidget {
         height10,
         height10,
         SizedBox(
-          height: size.height * 0.13,
+          height: size.height * 0.2,
           child: FutureBuilder<List<Product>>(
             future: _male,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasError) {
                 return Text("Error ${snapshot.hasError}");
               } else {
