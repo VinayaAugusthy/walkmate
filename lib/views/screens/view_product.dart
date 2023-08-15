@@ -1,7 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
 import 'package:walkmate/core/colors/colors.dart';
 import 'package:walkmate/core/constants/constants.dart';
 import 'package:walkmate/models/cart_model.dart';

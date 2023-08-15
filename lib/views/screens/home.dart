@@ -17,26 +17,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
   late Future<List<Product>> _male;
-  // late Future<List<Sneakers>> _female;
-  // late Future<List<Sneakers>> _kids;
+
   getMale() {
     _male = Hepler().getMaleSneakers();
   }
-
-  // getFemale() {
-  //   _female = Hepler().getFemaleSneakers();
-  // }
-
-  // getKids() {
-  //   _kids = Hepler().getKidsSneakers();
-  // }
 
   @override
   void initState() {
     super.initState();
     getMale();
-    // getFemale();
-    // getKids();
   }
 
   @override
