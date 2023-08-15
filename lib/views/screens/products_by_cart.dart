@@ -6,7 +6,7 @@ import '../shared/catalogue_widget.dart';
 import '../shared/style.dart';
 
 class ProductsByCat extends StatefulWidget {
-  const ProductsByCat({super.key});
+  const ProductsByCat({super.key, required int tabIndex});
 
   @override
   State<ProductsByCat> createState() => _ProductsByCatState();
@@ -16,11 +16,15 @@ class _ProductsByCatState extends State<ProductsByCat>
     with TickerProviderStateMixin {
   late final TabController _tabController =
       TabController(length: 3, vsync: this);
-  Future<List<Product>> _male = [] as Future<List<Product>>;
+  late Future<List<Product>> _male;
   // late Future<List<Sneakers>> _female;
   // late Future<List<Sneakers>> _kids;
   getMale() async {
-    _male = (await Hepler().getMaleSneakers()) as Future<List<Product>>;
+    try {
+      _male = Hepler().getMaleSneakers();
+    } catch (error) {
+      print("$error");
+    }
   }
 
   // getFemale() {
@@ -35,6 +39,7 @@ class _ProductsByCatState extends State<ProductsByCat>
   void initState() {
     super.initState();
     getMale();
+
     // getFemale();
     // getKids();
   }
@@ -74,7 +79,9 @@ class _ProductsByCatState extends State<ProductsByCat>
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            // filter();
+                          },
                           child: Icon(
                             Icons.menu,
                             color: whiteColor,
@@ -132,4 +139,54 @@ class _ProductsByCatState extends State<ProductsByCat>
       ),
     );
   }
+
+  // Future<dynamic> filter() {
+  //   return showModalBottomSheet(
+  //     context: context,
+  //     isScrollControlled: true,
+  //     backgroundColor: Colors.white54,
+  //     builder: (context) => Container(
+  //       height: MediaQuery.sizeOf(context).height * 0.82,
+  //       decoration: BoxDecoration(
+  //         color: whiteColor,
+  //         borderRadius: const BorderRadius.only(
+  //           topLeft: Radius.circular(25),
+  //           topRight: Radius.circular(25),
+  //         ),
+  //       ),
+  //       child: Column(
+  //         children: [
+  //           height10,
+  //           Container(
+  //             height: 5,
+  //             width: 40,
+  //             decoration: BoxDecoration(
+  //               borderRadius: BorderRadius.circular(10),
+  //               color: Colors.black38,
+  //             ),
+  //             child: SizedBox(
+  //               height: MediaQuery.sizeOf(context).height * 0.7,
+  //               child: Column(
+  //                 children: [
+  //                   const CustomSpacer(),
+  //                   Text(
+  //                     'Filter',
+  //                     style: textStyle(40, blackColor, FontWeight.bold),
+  //                   ),
+  //                   const CustomSpacer(),
+  //                   Text(
+  //                     'Gender',
+  //                     style: textStyle(20, blackColor, FontWeight.bold),
+  //                   ),
+  //                   height10,
+  //                   height10,
+  //                 ],
+  //               ),
+  //             ),
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 }

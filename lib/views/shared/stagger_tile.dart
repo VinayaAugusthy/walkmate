@@ -21,6 +21,8 @@ class _StaggerTileState extends State<StaggerTile> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.sizeOf(context);
     return Container(
+      height: size.height * 0.4,
+      width: size.width * 0.5,
       decoration: BoxDecoration(
         color: whiteColor,
         borderRadius: BorderRadius.circular(16),
@@ -28,13 +30,13 @@ class _StaggerTileState extends State<StaggerTile> {
       child: Padding(
         padding: EdgeInsets.only(bottom: size.height * 0.01),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
               padding: EdgeInsets.all(size.height * 0.01),
               child: Image.network(
                 widget.imageUrl,
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
               ),
             ),
             height10,
@@ -48,9 +50,11 @@ class _StaggerTileState extends State<StaggerTile> {
                     right: size.width * 0.02,
                     bottom: size.width * 0.01,
                   ),
-                  child: Text(
-                    widget.name,
-                    style: textStyle(20, blackColor, FontWeight.w700),
+                  child: SizedBox(
+                    child: Text(
+                      widget.name,
+                      style: textStyle(10, blackColor, FontWeight.w700),
+                    ),
                   ),
                 ),
                 Padding(

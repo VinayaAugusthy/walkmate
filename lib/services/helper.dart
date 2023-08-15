@@ -58,19 +58,33 @@ class Hepler {
   //   return sneaker;
   // }
 
+  // Future<List<Product>> getMaleSneakers() async {
+  //   String uri = 'https://dummyjson.com/products/category/mens-shoes';
+
+  //   final url = Uri.parse(uri);
+  //   List maleSneakers = [];
+  //   final response = await http.get(url);
+  //   if (response.statusCode == 200) {
+  //     final data = json.decode(response.body);
+  //     final List<dynamic> results = data['results'];
+  //     for (var comingSoon in results) {
+  //       maleSneakers.add(comingSoon);
+  //     }
+  //   }
+  //   return Product.maleSneakersFromJson(maleSneakers);
+  // }
   Future<List<Product>> getMaleSneakers() async {
-    String uri = 'https://dummyjson.com/mens-shoes/';
+    String uri = 'https://dummyjson.com/products/category/mens-shoes';
 
     final url = Uri.parse(uri);
-    List maleSneakers = [];
     final response = await http.get(url);
+
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
-      final List<dynamic> results = data['results'];
-      for (var comingSoon in results) {
-        maleSneakers.add(comingSoon);
-      }
+      final MaleSneakers maleSneakers = MaleSneakers.fromJson(data);
+      return maleSneakers.products;
+    } else {
+      throw Exception("Failed to load male sneakers");
     }
-    return Product.maleSneakersFromJson(maleSneakers);
   }
 }
